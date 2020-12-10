@@ -187,13 +187,7 @@ class RNVideoEditorSDKModule(reactContext: ReactApplicationContext) : ReactConte
     private fun startEditor(settingsList: VideoEditorSettingsList?) {
         val currentActivity = this.currentActivity ?: throw RuntimeException("Can't start the Editor because there is no current activity")
         if (settingsList != null) {
-            (currentActivity as? PermissionAwareActivity)?.also {
-                for (permission in PermissionRequest.NEEDED_EDITOR_PERMISSIONS) {
-                    if (it.checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-                        return
-                    }
-                }
-            }
+            
             MainThreadRunnable {
                 VideoEditorBuilder(currentActivity)
                   .setSettingsList(settingsList)
